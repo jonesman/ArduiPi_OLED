@@ -38,7 +38,7 @@ CFLAGS=${CCFLAGS}
 all: ${PROGRAMS}
 
 ${PROGRAMS}: ${SOURCES}
-	$(CXX) $(CFLAGS) -Wall  -lArduiPi_OLED $@.cpp -o $@
+	$(CXX) $(CFLAGS) -Wall $@.cpp -o $@ -lArduiPi_OLED
 
 clean:
 	rm -rf $(PROGRAMS)

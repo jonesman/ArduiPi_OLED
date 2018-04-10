@@ -149,11 +149,7 @@ class ArduiPi_OLED : public Adafruit_GFX
  public:
   ArduiPi_OLED();
 
-  // SPI Init
-  boolean init(int8_t DC, int8_t RST, int8_t CS, uint8_t OLED_TYPE);
-  
-  // I2C Init
-  boolean init(int8_t RST, uint8_t OLED_TYPE);
+  boolean init(uint8_t OLED_TYPE);
 
   boolean oled_is_spi_proto(uint8_t OLED_TYPE); /* to know protocol before init */
   boolean select_oled(uint8_t OLED_TYPE) ;
@@ -192,7 +188,7 @@ class ArduiPi_OLED : public Adafruit_GFX
 
   private:
   uint8_t *poledbuff; // Pointer to OLED data buffer in memory
-  int8_t _i2c_addr, dc, rst, cs;
+  int8_t _i2c_addr, dc, rst, spi;
   int16_t oled_width, oled_height;
   int16_t oled_buff_size;
   uint8_t vcc_type;
@@ -201,15 +197,8 @@ class ArduiPi_OLED : public Adafruit_GFX
   
   inline boolean isI2C(void);
   inline boolean isSPI(void);
-  void fastSPIwrite(uint8_t c);
-  void fastSPIwrite(char* tbuf, uint32_t len);
-  void fastI2Cwrite(uint8_t c);
-  void fastI2Cwrite(char* tbuf, uint32_t len);
-  void slowSPIwrite(uint8_t c);
 
-
-
-
+  
   //volatile uint8_t *dcport;
   //uint8_t dcpinmask;
 };

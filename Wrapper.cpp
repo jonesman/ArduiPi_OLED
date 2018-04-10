@@ -51,20 +51,9 @@ extern "C" void Wrapper_Init(int oledType)
 
 	extDisplay = new ArduiPi_OLED();
 
-	// SPI
-	if (extDisplay->oled_is_spi_proto(oledType))
-	{
-		// SPI change parameters to fit to your LCD
-		if (!extDisplay->init(OLED_SPI_DC, OLED_SPI_RESET, OLED_SPI_CS, oledType))
+    if (!extDisplay->init(oledType))
 			exit(EXIT_FAILURE);
-	}
-	else
-	{
-		// I2C change parameters to fit to your LCD
-		if (!extDisplay->init(OLED_I2C_RESET, oledType))
-			exit(EXIT_FAILURE);
-	}
-
+    
 	extDisplay->begin();
 
 	// init done

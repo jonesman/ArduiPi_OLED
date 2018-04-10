@@ -48,8 +48,8 @@ int sleep_divisor = 1 ;
 	
 // default options values
 s_opts opts = {
-	OLED_ADAFRUIT_SPI_128x32,	// Default oled
-  false										// Not verbose
+	OLED_ADAFRUIT_I2C_128x64,	// Default oled
+  true										// Not verbose
 };
 
 #define NUMFLAKES 10
@@ -233,7 +233,9 @@ void testdrawline() {
   }
   for (int16_t i=0; i<display.width(); i+=4) {
     display.drawLine(display.width()-1, 0, i, display.height()-1, WHITE); 
-    display.display();
+    display.display();/*
+ * Put plain C function declarations here ...
+ */ 
   }
   usleep(250000/sleep_divisor);
 }
@@ -377,19 +379,8 @@ int main(int argc, char **argv)
 	// Get OLED type
 	parse_args(argc, argv);
 
-	// SPI
-	if (display.oled_is_spi_proto(opts.oled))
-	{
-		// SPI change parameters to fit to your LCD
-		if ( !display.init(OLED_SPI_DC,OLED_SPI_RESET,OLED_SPI_CS, opts.oled) )
+    if ( !display.init(opts.oled) )
 			exit(EXIT_FAILURE);
-	}
-	else
-	{
-		// I2C change parameters to fit to your LCD
-		if ( !display.init(OLED_I2C_RESET,opts.oled) )
-			exit(EXIT_FAILURE);
-	}
 
 	display.begin();
 	

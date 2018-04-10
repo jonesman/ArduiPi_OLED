@@ -50,8 +50,8 @@ CFLAGS=$(CCFLAGS)
 all: ArduiPi_OLED install
 
 # Make the library
-ArduiPi_OLED: ArduiPi_OLED.o Adafruit_GFX.o bcm2835.o Wrapper.o
-	$(CXX) -shared -Wl,-soname,$(LIB).so.1 $(CFLAGS) $(LDFLAGS)  -o ${LIBNAME} $^ -li2c
+ArduiPi_OLED: ArduiPi_OLED.o Adafruit_GFX.o Wrapper.o dev_io.o
+	$(CXX) -shared -Wl,-soname,$(LIB).so.1 $(CFLAGS) $(LDFLAGS)  -o ${LIBNAME} $^
 
 # Library parts (use -fno-rtti flag to avoid link problem)
 ArduiPi_OLED.o: ArduiPi_OLED.cpp
@@ -60,11 +60,11 @@ ArduiPi_OLED.o: ArduiPi_OLED.cpp
 Adafruit_GFX.o: Adafruit_GFX.cpp
 	$(CXX) -Wall -fPIC -fno-rtti $(CFLAGS) -c $^
 
-bcm2835.o: bcm2835.c
-	$(CC) -Wall -fPIC $(CFLAGS) -c $^
+dev_io.o: dev_io.c
+	$(CC) -Wall -fPIC -fno-rtti $(CFLAGS) -c $^
 
 Wrapper.o: Wrapper.cpp
-	$(CC) -Wall -fPIC $(CFLAGS) -c $^
+	$(CC) -Wall -fPIC -fno-rtti $(CFLAGS) -c $^
 
 # Install the library to LIBPATH
 install: 
@@ -80,7 +80,7 @@ install:
 	@if ( test ! -d $(PREFIX)/include ) ; then mkdir -p $(PREFIX)/include ; fi
 	@cp -f  Adafruit_*.h $(PREFIX)/include
 	@cp -f  ArduiPi_*.h $(PREFIX)/include
-	@cp -f  bcm2835.h $(PREFIX)/include
+	@cp -f  dev_io.h $(PREFIX)/include
 	
 	
 # Uninstall the library 
@@ -90,7 +90,7 @@ uninstall:
 
 	@echo "[Uninstall Headers]"
 	@rm -rf  $(PREFIX)/include/ArduiPi_OLED*
-	@rm -rf  $(PREFIX)/include/bcm2835.h
+	@rm -rf  $(PREFIX)/include/dev_io.h
 	
 # clear build files
 clean:

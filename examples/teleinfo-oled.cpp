@@ -892,19 +892,10 @@ int main(int argc, char **argv)
 		}
 	}
 	
-	 // SPI
-	if (display.oled_is_spi_proto(opts.oled))
-	{
-		// SPI change parameters to fit to your LCD
-		if ( !display.init(OLED_SPI_DC,OLED_SPI_RESET,OLED_SPI_CS, opts.oled) )
-			exit(EXIT_FAILURE);
-	}
-	else
-	{
-		// I2C change parameters to fit to your LCD
-		if ( !display.init(OLED_I2C_RESET,opts.oled) )
-			exit(EXIT_FAILURE);
-	}
+
+    // SPI change parameters to fit to your LCD
+    if ( !display.init(opts.oled) )
+        exit(EXIT_FAILURE);
 
 	display.begin();
 	display.clearDisplay();
