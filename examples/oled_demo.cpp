@@ -48,7 +48,8 @@ int sleep_divisor = 1 ;
 	
 // default options values
 s_opts opts = {
-	OLED_ADAFRUIT_I2C_128x64,	// Default oled
+	//OLED_SH1106_I2C_128x64,	// Default oled
+    OLED_SH1106_I2C_128x64,
   true										// Not verbose
 };
 
