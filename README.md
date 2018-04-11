@@ -1,3 +1,15 @@
+The original library has been modified to write to the I2C devices at /dev/i2c-X
+instead of driving the IO pins directly.  
+Device and address can be set in dev_io.h  
+Not implemented for SPI.  
+
+[04/2018] Tested on an Orange Pi Zero H2+ running Armbian
+(Armbian has something in the boot config called "overlays" which enable IO ports, in this case it was 'i2c0')
+with an "SSD1306" OLED display (128x64). Had to use type "OLED_SH1106_I2C_128x64" for the library init to get it to work.
+  
+Thanks to the original author, what follows is the original README:  
+  
+
 Raspberry PI OLED Library Driver
 ================================
 
