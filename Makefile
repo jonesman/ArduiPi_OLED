@@ -46,8 +46,7 @@ CC=gcc
 CFLAGS=$(CCFLAGS)
 
 # make all
-# reinstall the library after each recompilation
-all: ArduiPi_OLED install
+all: ArduiPi_OLED 
 
 # Make the library
 ArduiPi_OLED: ArduiPi_OLED.o Adafruit_GFX.o Wrapper.o dev_io.o
