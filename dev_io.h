@@ -2,7 +2,11 @@
 #define DEV_TYPE_I2C 1
 #define DEV_TYPE_SPI 2
 
-#define I2C_DEV "/dev/i2c-0"
+#ifdef BANANAPI
+#	define I2C_DEV "/dev/i2c-2"
+#else
+#	define I2C_DEV "/dev/i2c-0"
+#endif
 #define I2C_ADDR 0x3c
 
 #define DEV_TYPE 1
